@@ -12,7 +12,8 @@ app.use("/users", userRouter);
 app.use("/api/notes", noteRouter);
 
 // =======Port Server is running on =========
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 6000;
+
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}`);
 });
