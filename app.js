@@ -17,9 +17,13 @@ app.get("/users", (req, res) => {
 
 const URI = process.env.DB_URL;
 
-mongoose.connect(URI, (err) => {
-  if (err) throw err;
-  console.log("Database Connected...");
+mongoose.connect(URI, () => {
+  //   if (err) throw err;
+  try {
+    console.log("Database Connected...");
+  } catch (err) {
+    return err.message;
+  }
 });
 
 const PORT = process.env.PORT || 8000;
