@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node app.js",
-    "backend": "nodemon app.js",
+    "start": "node backend.js",
+    "backend": "nodemon backend.js",
     "client": "cd client && npm start",
     "server": "nodemon server.js",
     "dev": "concurrently -n 'server,client' -c 'red,green' \"nodemon server.js\" \"npm run client\""
