@@ -32,7 +32,30 @@ const loginCtrl = {
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) return res.status(500).json({ msg: "Incorrect password" });
 
-      res.json({ msg: "Login success" });
+      //   On login success
+      const payload = { id: user._id, name: user.username };
+      const token = jwt.sign(payload, process.env.TOKEN_SECRET, {
+        expiresIn: "1d",
+      });
+
+      res.json({ msg: "Login success", token });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+  verifiedToken: (req, res) => {
+    try {
+      const token = req.header("Authorization");
+      if (!token) return res.send(false);
+
+      jwt.verify(token, process.env.TOKEN_SECRET, async (err, verified) => {
+        if (err) return res.send(false);
+
+        const user = await Users.findById(verified.id);
+        if (!user) return res.send(false);
+
+        return res.send(true);
+      });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }

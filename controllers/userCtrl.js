@@ -44,7 +44,7 @@ const userCtrl = {
     }
   },
 
-  verifiedToken: (req, res) => {
+  verifiedToken: async (req, res) => {
     try {
       const token = req.header("Authorization");
       if (!token) return res.send(false);
