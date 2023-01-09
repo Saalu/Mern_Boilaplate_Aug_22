@@ -6,7 +6,7 @@ const loginRoute = require("./routes/loginRoute");
 
 const app = express();
 app.use(express.json());
-app.use("/emp", empRoute);
+app.use("/api", empRoute);
 app.use("/users", loginRoute);
 
 const URI = process.env.PRACTICE_DB;

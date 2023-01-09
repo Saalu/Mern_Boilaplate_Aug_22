@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const empSchema = new mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
       required: true,
     },
@@ -19,6 +19,10 @@ const empSchema = new mongoose.Schema(
       default: Date.now,
     },
     user_id: {
+      type: String,
+      required: true,
+    },
+    createdBy: {
       type: String,
       required: true,
     },
