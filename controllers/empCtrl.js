@@ -42,6 +42,7 @@ const empCtrl = {
   },
   getEmployee: async (req, res) => {
     try {
+      // const { id, name } = req.user;
       const emp = await Employees.findById(req.params.id);
       res.json(emp);
     } catch (err) {
@@ -50,8 +51,10 @@ const empCtrl = {
   },
   getEmployees: async (req, res) => {
     try {
+      res.json({ user_id: req.user.id, client: req.user.name });
+
       const emps = await Employees.find();
-      res.json(emps);
+      // res.json(emps);
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
