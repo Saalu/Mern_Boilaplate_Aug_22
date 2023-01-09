@@ -2,12 +2,15 @@ const Employees = require("../models/empModel");
 
 const empCtrl = {
   createEmployee: async (req, res) => {
-    const { username, position, salary } = req.body;
+    const { username, position, salary, date } = req.body;
     try {
       const newEmp = new Employees({
-        username: username,
-        position: position,
-        salary: salary,
+        username,
+        position,
+        salary,
+        date,
+        user_id: req.user.id,
+        createdBy: req.user.name,
       });
 
       await newEmp.save();
@@ -42,7 +45,6 @@ const empCtrl = {
   },
   getEmployee: async (req, res) => {
     try {
-      // const { id, name } = req.user;
       const emp = await Employees.findById(req.params.id);
       res.json(emp);
     } catch (err) {
@@ -51,10 +53,8 @@ const empCtrl = {
   },
   getEmployees: async (req, res) => {
     try {
-      res.json({ user_id: req.user.id, client: req.user.name });
-
       const emps = await Employees.find();
-      // res.json(emps);
+      res.json(emps);
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }

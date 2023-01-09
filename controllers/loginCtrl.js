@@ -35,7 +35,7 @@ const loginCtrl = {
       //   On login success
       const payload = { id: user._id, name: user.username };
       const token = jwt.sign(payload, process.env.TOKEN_SECRET, {
-        expiresIn: "1d",
+        expiresIn: "10s",
       });
 
       res.json({ msg: "Login success", token });
